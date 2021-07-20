@@ -4,8 +4,8 @@ Javascript app for analysing basketball decisions on film
 ## Development Steps
 ### Step 1:
 Create Database for:
-- Filepath of Videos
-- Filepath of saved image layers
+- Filepath of Videos with id
+- Layer numbering tagged to the video and the element type and frame number
 - Basic Commenting and writing structure
 - User identification
 
