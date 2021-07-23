@@ -84,6 +84,9 @@ ipython_config.py
 # pyenv
 .python-version
 
+#private stuff
+private-backend/app/base_web.py
+
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
@@ -127,3 +130,39 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+###for FE
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/private-frontend/node_modules
+/private-frontend/.pnp
+/private-frontend.pnp.js
+
+# testing
+/private-frontend/coverage
+
+# next.js
+/private-frontend/.next/
+/private-frontend/out/
+
+# production
+/private-frontend/build
+
+# misc
+/private-frontend/.DS_Store
+/private-frontend/*.pem
+
+# debug
+/private-frontend/npm-debug.log*
+/private-frontend/yarn-debug.log*
+/private-frontend/yarn-error.log*
+
+# local env files
+/private-frontend/.env.local
+/private-frontend/.env.development.local
+/private-frontend/.env.test.local
+/private-frontend/.env.production.local
+
+# vercel
+/private-frontend/.vercel

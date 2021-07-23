@@ -7,7 +7,7 @@ Create Database for:
 - Filepath of Videos with id
 - Layer numbering tagged to the video and the element type and frame number
 - Basic Commenting and writing structure
-- User identification
+- User identification and password checking
 
 ### Step 2: 
 Create Backend APIs:
