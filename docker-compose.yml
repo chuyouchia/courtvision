@@ -9,7 +9,7 @@ services:
         volumes:
             - ./private-backend/app:/private-backend/app
         command: >
-            python3 /private-backend/app/web.py
+            python3 /private-backend/app/web.py --db_host=db
         environment: 
             - DB_HOST=db
             - DB_NAME=app
