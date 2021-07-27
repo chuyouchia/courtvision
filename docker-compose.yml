@@ -18,6 +18,25 @@ services:
         depends_on: 
             - db
     
+    frontend:
+        build:
+            context: ./private-frontend
+        ports:
+            - "3000:3000"
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+        volumes:
+            - ./private-frontend:/private-frontend/app_front
+            - ./private-frontend/pages:/app_front/pages
+            - ./private-frontend/public:/app_front/public
+            - ./private-frontend/node_modules:/app_front/node_modules
+            - ./private-frontend/.next:/app_front/.next
+            - ./private-frontend/styles:/app_front/styles
+        # prod command: (sh -c "python manage.py npm run build && npm start") 
+        command: >
+            npm run dev 
+        depends_on: 
+            - app
     
     db:
         image: postgres:10-alpine

@@ -47,11 +47,12 @@ async def maybe_create_tables(db):
 
 define("port", default=8888, help="run on the given port", type=int)
 #note that we are using the localhost IP adress and the port number -> even if fail over, if same host still connects
-define("db_host", default="127.0.0.1", help="blog database host")
-define("db_port", default=5432, help="blog database port")
-define("db_database", default="app", help="blog database name")
-define("db_user", default="postgres", help="blog database user")
-define("db_password", default="supersecretpassword", help="blog database password")
+define("db_host", default="127.0.0.1", help="cv database host")
+define("db_port", default=5432, help="cv database port")
+define("db_database", default="app", help="cv database name")
+define("db_user", default="postgres", help="cv database user")
+define("db_password", default="supersecretpassword", help="cv database password")
+define("autoreload", type=bool, default=True, help="tornado autoreload flag")
 
 async def main_app():
     tornado.options.parse_command_line()
