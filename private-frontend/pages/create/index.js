@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/router";
 import ReactPlayer from 'react-player'
+
+import { useRouter } from "next/router";
 
 import { Input, Button } from '@material-ui/core';
 

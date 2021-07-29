@@ -6,8 +6,16 @@ const List = () => {
 
   return (
     <>
-      <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>this is a new list of snapshots</h1>
-      <ol style={{listStylePosition: 'inside', textAlign:"center"}}>
+      <h1
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        this is a new list of snapshots
+      </h1>
+      <ol style={{ listStylePosition: "inside", textAlign: "center" }}>
         <li>
           <Link href="/view?i=1">vid 1</Link>
         </li>

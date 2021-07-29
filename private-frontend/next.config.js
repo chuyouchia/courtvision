@@ -1,5 +1,6 @@
 module.exports = {
   reactStrictMode: true,
+  //query every second
   webpackDevMiddleware: config => {
     config.watchOptions = {
       poll: 1000,
