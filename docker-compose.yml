@@ -46,3 +46,14 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
         
+    web_server:
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+        restart: always
+        ports:
+            - "20000:80"
+            - "20001:443"
+        depends_on: 
+            - app
+            - frontend

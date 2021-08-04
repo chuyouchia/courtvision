@@ -15,17 +15,18 @@ class CustomApplication(Application):
     def __init__(self, db):
         self.db = db
         handlers = [
-            (r"/", HomeHandler),
-            (r"/main", MainHandler),
-            (r"/youtube", YoutubeHandler),
-            (r"/archive", ArchiveHandler),
-            (r"/entry/([^/]+)", EntryHandler),
+            (r"/-/", HomeHandler),
+            (r"/-/main", MainHandler),
+            (r"/-/youtube", YoutubeHandler),
+            (r"/-/archive", ArchiveHandler),
+            (r"/-/entry/([^/]+)", EntryHandler),
+            (r"/-/image", POSTImageHandler),
         ]
         settings = dict(
             blog_title="Tornado Blog",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            xsrf_cookies=True,
+            xsrf_cookies=False,
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
             login_url="__TODO:CREATE_LOGIN_URL__",
             debug=True,
