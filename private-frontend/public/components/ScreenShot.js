@@ -51,21 +51,14 @@ const ScreenShot = (props) => {
     ];
 
     //save the file back to the database
-    console.log(file);
-    const headers = {headers: {"Access-Control-Allow-Origin": "*"}}
-
     var formData = new FormData();
     formData.append("image", file);
-    console.log(formData)
-    const resp = await axios.get('http://localhost:7000/main', headers)
-    console.log(resp)
-    /**
-    await axios.post('http://localhost:7000/image', formData, {
+
+    const resp = await axios.post('http://localhost:20000/-/image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-    })
-     */
+    })    
     
     return file;
   };

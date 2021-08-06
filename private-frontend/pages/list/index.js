@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import React,{ useEffect } from "react";
 import Link from "next/link";
+import styles from '../../styles/Home.module.css'
 
 const List = () => {
   //get the video thumbnails from the backend
@@ -7,25 +8,33 @@ const List = () => {
   return (
     <>
       <h1
+        className={styles.title}
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        this is a new list of snapshots
+        Start by selecting one of the snapshots!
       </h1>
-      <ol style={{ listStylePosition: "inside", textAlign: "center" }}>
-        <li>
-          <Link href="/view?i=1">vid 1</Link>
-        </li>
-        <li>
-          <Link href="/view?i=2">vid 2</Link>
-        </li>
-        <li>
-          <Link href="/view?i=3">vid 3</Link>
-        </li>
-      </ol>
+      
+      <main className={styles.main}>
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <Link href="/view?i=1">image 1</Link>
+          </div>
+          <div className={styles.card}>
+            <Link href="/view?i=2">image 2</Link>
+          </div>
+
+          <div className={styles.card}>
+            <Link href="/view?i=3">image 3</Link>
+          </div>
+          <span className={styles.card}>
+            <Link href="/view?i=4">image 4</Link>
+          </span>
+        </div>
+      </main>
     </>
   );
 };

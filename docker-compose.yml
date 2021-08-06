@@ -9,7 +9,10 @@ services:
         volumes:
             - ./private-backend/app:/private-backend/app
         command: >
-            python3 /private-backend/app/web.py --db_host=db
+            sh -c "cd /private-backend/app && 
+                python manage.py wait_for_db && 
+                python manage.py migrate && 
+                python manage.py runserver 0.0.0.0:8888"
         restart: always
         environment: 
             - DB_HOST=db
@@ -41,6 +44,8 @@ services:
     db:
         image: postgres:10-alpine
         restart: always
+        #volumes:
+        #    - pgdata:/var/lib/postgresql/data/
         environment: 
             - POSTGRES_DB=app
             - POSTGRES_USER=postgres

@@ -86,6 +86,7 @@ ipython_config.py
 
 #private stuff
 private-backend/app/base_web.py
+private-backend/app/api_wrapper.py
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
