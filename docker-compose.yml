@@ -5,14 +5,14 @@ services:
         build:
             context: ./private-backend
         ports:
-            - "7000:8888"
+            - "7000:7000"
         volumes:
             - ./private-backend/app:/private-backend/app
         command: >
             sh -c "cd /private-backend/app && 
                 python manage.py wait_for_db && 
                 python manage.py migrate && 
-                python manage.py runserver 0.0.0.0:8888"
+                python manage.py runserver 0.0.0.0:7000"
         restart: always
         environment: 
             - DB_HOST=db
