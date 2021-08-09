@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ScreenShot = (props) => {
   const classes = useStyles();
-  const [cat, setCat] = useState("");
+  const [theme, setTheme] = useState("");
 
   const [imageName, setImageName] = useState("");
   //obtain screen shot from link
@@ -53,8 +53,11 @@ const ScreenShot = (props) => {
     //save the file back to the database
     var formData = new FormData();
     formData.append("image", file);
+    formData.append("name", imageName);
+    formData.append("theme", theme);
 
-    const resp = await axios.post('http://localhost:20000/-/image', formData, {
+
+    const resp = await axios.post('http://localhost:20000/-/snapshot/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -66,7 +69,7 @@ const ScreenShot = (props) => {
     <>
       <div style={{ marginTop: "10px" }}>
         <text style={{ marginRight: "10px" }}>Enter Name:</text>
-        <Input style={{ width: "45%" }} onChange={setImageName} />
+        <Input style={{ width: "45%" }} onChange={(event) => setImageName(event.target.value)} value={imageName}/>
         <Button
           variant="contained"
           style={{ margin: "10px" }}
@@ -82,8 +85,8 @@ const ScreenShot = (props) => {
         <Select
           labelId="demo-simple-select-placeholder-label-label"
           id="demo-simple-select-placeholder-label"
-          value={cat}
-          onChange={(event) => setCat(event.target.value)}
+          value={theme}
+          onChange={(event) => setTheme(event.target.value)}
           displayEmpty
           className={classes.selectEmpty}
         >
@@ -94,7 +97,7 @@ const ScreenShot = (props) => {
             return <MenuItem value={item} key={item}>{item}</MenuItem>;
           })}
         </Select>
-        <FormHelperText>Categorize the situation</FormHelperText>
+        <FormHelperText>themeegorize the situation</FormHelperText>
       </FormControl>
       <canvas ref={props.canvasRef} id="screenshot" width="800" height="480" />
     </>
