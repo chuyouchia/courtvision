@@ -8,7 +8,7 @@ from rest_framework import authentication, permissions, status
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from core.models import Snapshot
-from core.services import snapshot_service
+from core.services import snapshot_service, youtube_dl_service
 from core.serializers import SnapshotSerializer
 
 # Create your views here.
@@ -59,6 +59,27 @@ class SnapshotView(APIView):
                 return Response(snapshot_serializer.data, status=status.HTTP_201_CREATED)
         else:
                 return Response(snapshot_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class VideoDetailView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        """
+        Return a video frame.
+        """
+        movie = '/vol/web/videos/1s.mp4'
+        imgdir = '/vol/web/media'
+        times = 3
+
+        youtube_dl_service.extract_frame(movie,times,imgdir)
+        return Response(data={"data": "video frame here"})
+
+    def post(self, request, format=None):
+        url = request.data['url']
+        result = youtube_dl_service.download_video_from_url(url, '/vol/web/videos', 1)
+        print(False)
+        return Response(data={"data": "downloaded ${url}".format(url=url)})
 
 class SnapshotDetail(APIView):
     """
