@@ -63,3 +63,5 @@ services:
         depends_on: 
             - app
             - frontend
+volumes:
+    pg_data:
