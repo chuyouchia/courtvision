@@ -36,7 +36,7 @@ const ScreenShot = (props) => {
   //obtain screen shot from link
 
   //save screenshot to backend
-  const saveImage = async () => {
+  const saveSnapshot = async () => {
     const canvas = props.canvasRef.current;
     const image = canvas.toDataURL();
 
@@ -44,26 +44,28 @@ const ScreenShot = (props) => {
     const res = await fetch(image);
     const buff = await res.arrayBuffer();
     // clone so we can rename, and put into array for easy proccessing
-    const file = [
-      new File([buff], `photo_${new Date()}.jpg`, {
+    const files = [
+      new File([buff], `${imageName}_${theme}_${new Date()}.jpeg`, {
         type: "image/jpeg",
       }),
     ];
 
     //save the file back to the database
     var formData = new FormData();
-    formData.append("image", file);
+    formData.append("snapshot", files[0]);
     formData.append("name", imageName);
     formData.append("theme", theme);
-
-
+    // for(var pair of formData.entries()) {
+    //   console.log(pair[0]+ ', '+ pair[1]);
+    // }
+   
     const resp = await axios.post('http://localhost:20000/-/snapshot/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
     })    
     
-    return file;
+    return files;
   };
   return (
     <>
@@ -73,7 +75,7 @@ const ScreenShot = (props) => {
         <Button
           variant="contained"
           style={{ margin: "10px" }}
-          onClick={saveImage}
+          onClick={saveSnapshot}
         >
           Save SS
         </Button>

@@ -12,8 +12,8 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 #set the mount volume for the database and create new user
-RUN mkdir /vol/web/media && \
-    mkdir /vol/web/static && \
+RUN mkdir -p /vol/web/media && \
+    mkdir -p /vol/web/static && \
     useradd -ms /bin/bash user && \
     chown -R user:user /vol/ && \
     chmod -R 755 /vol/web

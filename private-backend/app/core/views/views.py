@@ -4,11 +4,12 @@ from django.http import Http404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import authentication, permissions
+from rest_framework import authentication, permissions, status
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from core.models import Snapshot
 from core.services import snapshot_service
+from core.serializers import SnapshotSerializer
 
 # Create your views here.
 class UserView(APIView):
@@ -40,19 +41,24 @@ class SnapshotView(APIView):
             item['id'] = snapshot.id
             item['theme'] = snapshot.theme
             item['name'] = snapshot.name
-            #item['file'] = snapshot.snapshot
+            item['created_at'] = snapshot.created_at
+            item['updated_at'] = snapshot.updated_at
+            item['image_url'] = snapshot.snapshot.url
+
             snapshots.append(item)
-            print("snapshot!")
-        
+
         return Response(data={"data": snapshots})
 
     def post(self, request, format=None):
         """
         Create a new snapshot.
         """
-        print(request.data)
-        result = snapshot_service.create_snapshot(request.data['name'], request.data['theme'], request.data['image'])
-        return Response(data={"result": "ok"})
+        snapshot_serializer = SnapshotSerializer(data=request.data)
+        if snapshot_serializer.is_valid():
+                snapshot_serializer.save()
+                return Response(snapshot_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+                return Response(snapshot_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SnapshotDetail(APIView):
     """
