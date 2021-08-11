@@ -26,6 +26,7 @@ urlpatterns = [
     path('-/accounts/', include('django.contrib.auth.urls')),
     path('-/users/', views.UserView.as_view()),
     path('-/snapshot/', views.SnapshotView.as_view()),
+    path('-/screenshot/', views.BaseSnapshotView.as_view()),
     path('-/videos/', views.VideoDetailView.as_view()),
 ] 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

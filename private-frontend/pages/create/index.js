@@ -7,6 +7,7 @@ import { Input, Button } from '@material-ui/core';
 
 import ScreenShot from '../../public/components/ScreenShot'
 
+import axios from 'axios';
 
 const VideoDetail = () => {
 
@@ -17,6 +18,8 @@ const VideoDetail = () => {
 
     const [url, setUrl] = useState('')
     const canvasRef = useRef();
+    const playerRef = useRef();
+    const [vidLocation, setVidLocation] = useState('')
 
     const updateVideoUrl = (event) => {
         event.preventDefault()
@@ -28,44 +31,62 @@ const VideoDetail = () => {
     }, [])
     
     const canIRun = docLoaded? navigator.mediaDevices.getDisplayMedia :null
+    
+    const downloadVideoViaURL = async() => {
+      //save the video and get back the directory
+      const data = { "url" : url}
+      const resp = await axios.post('http://localhost:20000/-/videos/', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      setVidLocation(resp.data.location)
+    }
 
     const takeScreenShot = async () => {
-      const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: { mediaSource: 'screen' }
-        ,
-      })
-      // get correct video track
-      const track = stream.getVideoTracks()[0]
-      // init Image Capture and not Video stream
-      const imageCapture = new ImageCapture(track)
-      // take first frame only
-      const bitmap = await imageCapture.grabFrame()
-      // destory video track to prevent more recording / mem leak
-      track.stop()
+      //pass the video directory to the http get url to get the frame 
+      const player = playerRef.current;
 
-      const canvas = canvasRef.current
-      // this could be a document.createElement('canvas') if you want
-      // draw weird image type to canvas so we can get a useful image
-      canvas.width = bitmap.width
-      canvas.height = bitmap.height
-      const context = canvas.getContext('2d')
-      context.drawImage(bitmap, 0, 0, bitmap.width, bitmap.height)
+      var urlID = url.split("?").pop();
+      const time = player.getCurrentTime()
+      const data = { 
+        "time" : time,
+        "name": urlID,
+        "location" : vidLocation,
+      }
       
+      const resp = await axios.post('http://localhost:20000/-/screenshot/', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      //display on canvas
+      const canvas = canvasRef.current
+      const ctx = canvas.getContext('2d')
+      const image = new Image();
+      image.onload = () => {
+        ctx.imageSmoothingEnabled = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 50, 50);
+      };
+      image.src = `http://localhost:20000/-/media/${urlID}_at_${time}.png`;
+
     }
     
-    
-
 
     return (<div style={{marginLeft: '20px'}}>
                 <div><h1> Actual video {videoId}</h1></div>
                 <div id ="player" >
-                    <ReactPlayer controls width='800px' height ='480px' url={url} />
+                    <ReactPlayer controls width='800px' height ='480px' url={url} ref={playerRef}/>
                 </div>
                 <div style={{ marginTop: '50px'}}>
                 <text style={{marginRight: '10px'}}>Enter URL link:</text>
                 <Input style={{width: "45%"}} onChange={updateVideoUrl}></Input>
+                
                 </div>
                 <div>
+                <Button variant="contained" style={{margin: '35px'}} onClick={downloadVideoViaURL}>Load URL</Button>
                 <Button variant="contained" style={{margin: '35px'}} onClick={() => canIRun? takeScreenShot(): {}}>Click me to get Frame!</Button>
                 </div>
                 <ScreenShot canvasRef={canvasRef}/>

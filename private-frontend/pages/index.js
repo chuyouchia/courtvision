@@ -31,9 +31,9 @@ const List = () => {
           <div className={styles.card}>
             <Link href="/view?i=3">image 3</Link>
           </div>
-          <span className={styles.card}>
+          <div className={styles.card}>
             <Link href="/view?i=4">image 4</Link>
-          </span>
+          </div>
         </div>
       </main>
     </>

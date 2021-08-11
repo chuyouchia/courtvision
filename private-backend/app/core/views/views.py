@@ -64,29 +64,34 @@ class VideoDetailView(APIView):
     authentication_classes = []
     permission_classes = []
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
+        url = request.data['url']
+        result = youtube_dl_service.download_video_from_url(url, '/vol/web/videos')
+        data = {
+            "data": "downloaded {url}".format(url=url),
+            "location" : result,
+            }
+        return Response(data=data)
+
+class BaseSnapshotView(APIView):
+    authentication_classes = []
+    permission_classes = []
+    """
+    Retrieve, create a base screenshot
+    """
+    def post(self, request, format=None):
         """
         Return a video frame.
         """
-        movie = '/vol/web/videos/1s.mp4'
-        imgdir = '/vol/web/media'
-        times = 3
+        print(request)
+        movie = request.data['location']
+        fixed_imgdir = '/vol/web/media'
+        times = request.data['time']
+        frame_name = request.data['name']
 
-        youtube_dl_service.extract_frame(movie,times,imgdir)
-        return Response(data={"data": "video frame here"})
-
-    def post(self, request, format=None):
-        url = request.data['url']
-        result = youtube_dl_service.download_video_from_url(url, '/vol/web/videos', 1)
-        print(False)
-        return Response(data={"data": "downloaded ${url}".format(url=url)})
-
-class SnapshotDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return Snapshot.objects.get(pk=pk)
-        except Snapshot.DoesNotExist:
-            raise Http404
+        img_path = youtube_dl_service.extract_frame(movie,frame_name, times,fixed_imgdir)
+        data = {
+            "image_location" : img_path,
+            }
+        
+        return Response(data=data)
