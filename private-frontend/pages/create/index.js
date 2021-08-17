@@ -75,22 +75,23 @@ const VideoDetail = () => {
     }
     
 
-    return (<div style={{marginLeft: '20px'}}>
-                <div><h1> Actual video {videoId}</h1></div>
-                <div id ="player" >
-                    <ReactPlayer controls width='800px' height ='480px' url={url} ref={playerRef}/>
-                </div>
-                <div style={{ marginTop: '50px'}}>
-                <text style={{marginRight: '10px'}}>Enter URL link:</text>
-                <Input style={{width: "45%"}} onChange={updateVideoUrl}></Input>
-                
-                </div>
-                <div>
-                <Button variant="contained" style={{margin: '35px'}} onClick={downloadVideoViaURL}>Load URL</Button>
-                <Button variant="contained" style={{margin: '35px'}} onClick={() => canIRun? takeScreenShot(): {}}>Click me to get Frame!</Button>
-                </div>
-                <ScreenShot canvasRef={canvasRef}/>
-            </div>);
+    return (
+      <div id="balloon-background">
+          <div style={{margin: '20px', display: 'inline'}}>
+
+            <h1 style={{border: "2px solid red"}}> Actual video {videoId}</h1>
+            <div id ="player" >
+                <ReactPlayer controls width='800px' height ='480px' url={url} ref={playerRef}/>
+            </div>
+            <div style={{ marginTop: '50px'}}>
+              <text style={{marginRight: '10px'}}>Enter URL link:</text>
+              <Input style={{width: "45%"}} onChange={updateVideoUrl}/>
+            </div>
+            <Button variant="contained" style={{margin: '35px'}} onClick={downloadVideoViaURL}>Load URL</Button>
+            <Button variant="contained" style={{margin: '35px'}} onClick={() => canIRun? takeScreenShot(): {}}>Click me to get Frame!</Button>
+            <ScreenShot style = {{display: 'inline'}}canvasRef={canvasRef}/>
+        </div>
+      </div>);
     
 };
 export default VideoDetail;

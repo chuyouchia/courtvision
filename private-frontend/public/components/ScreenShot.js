@@ -68,7 +68,7 @@ const ScreenShot = (props) => {
     return files;
   };
   return (
-    <>
+    <div>
       <div style={{ marginTop: "10px" }}>
         <text style={{ marginRight: "10px" }}>Enter Name:</text>
         <Input style={{ width: "45%" }} onChange={(event) => setImageName(event.target.value)} value={imageName}/>
@@ -92,17 +92,17 @@ const ScreenShot = (props) => {
           displayEmpty
           className={classes.selectEmpty}
         >
-          <MenuItem value="">
-            <em>None of the Above</em>
+          <MenuItem value="None of the Above" key ={"None of the Above"}>
+            None of the Above
           </MenuItem>
           {THEMES.map((item) => {
             return <MenuItem value={item} key={item}>{item}</MenuItem>;
           })}
         </Select>
-        <FormHelperText>themeegorize the situation</FormHelperText>
+        <FormHelperText>Categorize the situation</FormHelperText>
       </FormControl>
       <canvas ref={props.canvasRef} id="screenshot" width="800" height="480" />
-    </>
+    </div>
   );
 };
 

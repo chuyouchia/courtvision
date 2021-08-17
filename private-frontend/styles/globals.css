@@ -4,8 +4,16 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: burlywood;
 }
 
+#balloon-background {
+  background-image: url(balloons.jpg);
+  background-repeat: no-repeat;
+  background-size: 800px 500px;
+  background-position: top center;
+  opacity: 0.75;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -13,4 +21,19 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+
+#pre-image-background {
+  background-image: url(Pre-process.png);
+  background-repeat: no-repeat;
+  background-size: 800px 500px;
+  background-position: top center;
+}
+
+#post-image-background {
+  background-image: url(Post-Process.png);
+  background-repeat: no-repeat;
+  background-size: 800px 500px;
+  background-position: top center;
 }

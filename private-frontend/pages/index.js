@@ -1,14 +1,17 @@
 import React,{ useEffect } from "react";
-import Link from "next/link";
-import styles from '../styles/Home.module.css'
+import MenuBar from "../public/components/MenuBar";
+import { makeStyles } from '@material-ui/core/styles';
+import SimpleCard from "../public/components/Card";
+
+const navItems = [{url:'/create', name: 'hehe'}, {url:'/view', name: 'view'}, {url:'/', name: 'home'}]
 
 const List = () => {
   //get the video thumbnails from the backend
-
   return (
     <>
+     <MenuBar navItems={navItems}>
+     </MenuBar>
       <h1
-        className={styles.title}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -18,25 +21,48 @@ const List = () => {
       >
         Start by selecting one of the snapshots!
       </h1>
-      
-      <main className={styles.main}>
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <Link href="/view?i=1">image 1</Link>
-          </div>
-          <div className={styles.card}>
-            <Link href="/view?i=2">image 2</Link>
-          </div>
-
-          <div className={styles.card}>
-            <Link href="/view?i=3">image 3</Link>
-          </div>
-          <div className={styles.card}>
-            <Link href="/view?i=4">image 4</Link>
+      <div style = {{display: 'flex', justifyContent: 'space-around', backgroundColor:'blue', padding:'30px'}}>
+        <SimpleCard href="/view?i=1" title="Image 1" body="body of card"/>
+        <SimpleCard href="/view?i=2" title="Image 2" body="body of card"/>
+        <SimpleCard href="/view?i=3" title="Image 3" body="body of card"/>
+      </div>
+      <div style = {{display: 'flex', justifyContent: 'space-around', padding:'30px'}}>
+      <div style = {{display: 'flex',flexDirection: 'column', justifyContent: 'center'}}> 
+        <div style={{width:'1000px'}}>
+          Explanation For Video Clipping
+          <div style = {{display: 'flex', justifyContent: 'space-around', padding:'40px'}}>
+            <div id="pre-image-background" style = {{ width: '450px', height: '275px'}}/>
+            <div>
+              Arrow
+            </div>
+            <div id="post-image-background" style = {{ width: '450px', height: '275px'}}/>
           </div>
         </div>
-      </main>
-    </>
+        <div style = {{display: 'flex',flexDirection: 'column', justifyContent: 'center'}}> 
+        <div style={{width:'1000px'}}>
+          Explanation For SnapShot review
+          <div style = {{display: 'flex', justifyContent: 'space-around', padding:'40px'}}>
+            <div id="pre-image-background" style = {{ width: '450px', height: '275px'}}/>
+            <div>
+              item 2
+            </div>
+            <div id="post-image-background" style = {{ width: '450px', height: '275px'}}/>
+          </div>
+        </div>
+        </div>
+        <div style={{width:'1000px'}}>
+          Explanation For community interaction
+          <div style = {{display: 'flex', justifyContent: 'space-around', padding:'40px'}}>
+            <div id="pre-image-background" style = {{ width: '450px', height: '275px'}}/>
+            <div>
+              item 2
+            </div>
+            <div id="post-image-background" style = {{ width: '450px', height: '275px'}}/>
+          </div>
+        </div>
+        </div>
+      </div>
+      </>
   );
 };
 export default List;
