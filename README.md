@@ -18,3 +18,14 @@ Javascript Game for analysing basketball decisions on film
 3. Embed Game on Website
 4. Add Snipping and automated game creation 
 5. Add Comments and communication (if there is a need for it later)
+
+
+## Potential Game Themes
+
+1. Pick and roll Ball Handler
+2. Pick and roll Ball Screener
+3. Moving without the ball
+4. Fast Break
+5. Drive and kick Reads
+6. Zone Defense, Help Defense
+7. Wildcard scenarios
