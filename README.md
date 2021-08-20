@@ -1,27 +1,20 @@
 # Court Vision
-Javascript app for analysing basketball decisions on film
+Javascript Game for analysing basketball decisions on film
 
-## Development Steps
-### Step 1:
-Create Database for:
-- Filepath of Videos/SS with id
-- Layer numbering tagged to the video/SS and the element type and frame number
-- Basic Commenting and writing structure
-- User identification and password checking
+## Gameplay flow:
 
-### Step 2: 
-Create Backend APIs:
-- Accepting Videos/SS
-- Adding Filters such as comments, circles, arrows
-- Adding Voting and Sharing
+1. Provide scenario
+2. Provide timer and selection options
+3. If selection correct, move on else explanation provided with progression video overlay
+    1. if there are more than 1 type of right answer, can say so as well
+4. Continue the levels and change the types
+5. Provide the opportunity to combine all of the supposedly wrong and bookmarked reads for further discussion in web page report and share with friends
 
 
-### Step 3:
-Create Frontend App:
-- Uploading Video/SS
-- Search in Card form
-- Ability to add comments to individual SS
+## Development Steps:
 
-
-### Step 4:
-Dockerize the Application dependencies to save costs
+1. Create 2D Game
+2. Create Website
+3. Embed Game on Website
+4. Add Snipping and automated game creation 
+5. Add Comments and communication (if there is a need for it later)
